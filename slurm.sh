@@ -1,0 +1,25 @@
+#!/bin/bash
+#SBATCH --ntasks=1               # 1 core(CPU)
+#SBATCH --nodes=1                # Use 1 node
+#SBATCH --job-name=vnet_test   # sensible name for the job
+#SBATCH --mem=16G                 # Default memory per CPU is 3GB.
+#SBATCH --partition=gpu # Use the verysmallmem-partition for jobs requiring < 10 GB RAM.
+#SBATCH --gres=gpu:1
+#SBATCH --mail-user=afmi@nmbu.no # Email me when job is done.
+#SBATCH --mail-type=ALL
+#SBATCH --output=outputs/unet-%A.out
+#SBATCH --error=outputs/unet-%A.out
+
+# If you would like to use more please adjust this.
+
+## Below you can put your scripts
+# If you want to load module
+module load singularity
+
+## Code
+# Hack to ensure that the GPUs work
+nvidia-modprobe -u -c=0
+
+# Run experiment
+bash copy_dataset.sh
+singularity exec --nv deoxys.sif python experiment.py
