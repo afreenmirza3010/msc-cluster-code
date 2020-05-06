@@ -1,3 +1,2 @@
 #!/bin/bash
-
-singularity pull shub://yngvem/ntnu-analysis:latest
+singularity pull --name deoxys.sif shub://afreenmirza3010/msc-cluster-code

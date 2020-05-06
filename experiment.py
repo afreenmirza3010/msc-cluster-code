@@ -7,35 +7,22 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 
 from deoxys.loaders.architecture import BaseModelLoader
-from tensorflow.keras.models import Model as KerasModel
-from tensorflow.keras.layers import Input, concatenate
-from tensorflow.keras.models import Sequential
+from keras.models import Model as KerasModel
+from keras.layers import Input, concatenate
+from keras.models import Sequential
 from tensorflow import image
 import tensorflow as tf
-from tensorflow.keras.callbacks import TensorBoard
+from keras.callbacks import TensorBoard
 import tensorboard
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import numpy as np
 
 
 
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+
 import scipy.ndimage
-from skimage import morphology
-from skimage import measure
-from skimage.transform import resize
-
-from plotly import __version__
-from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
-from plotly.tools import FigureFactory as FF
-from plotly.graph_objs import *
-
-
-
-import numpy as np
 import math
 
-from scipy.signal import resample_poly
+
 
 from deoxys.model.layers import layer_from_config
 from deoxys.customize import custom_architecture
@@ -43,7 +30,7 @@ import os
 import h5py
 
 @custom_architecture
-class Vnet(BaseModelLoader):
+class VnetAfreen(BaseModelLoader):
     """
     Create a unet neural network from layers
 
@@ -335,100 +322,16 @@ class Vnet(BaseModelLoader):
 
 
 if __name__ == '__main__':
-    def make_mesh(image, threshold=-300, step_size=1):
-        print ("Transposing surface")
-
-        p = image.transpose(2, 1, 0)
-
-        print("calculating surface")
-
-        verts, faces, norm, val = measure.marching_cubes_lewiner(p, threshold, step_size=step_size,
-                                                         allow_degenerate=True)
-        return verts, faces
-
-
-    def plotly_3d(verts, faces):
-        x, y, z = zip(*verts)
-
-        print("Drawing")
-
-
-        # Make the colormap single color since the axes are positional not intensity.
-        #    colormap=['rgb(255,105,180)','rgb(255,255,51)','rgb(0,191,255)']
-        colormap = ['rgb(255,105,180)','rgb(255,255,51)','rgb(0,191,255)']
-
-        fig = FF.create_trisurf(x=x,
-                                y=y,
-                                z=z,
-                                plot_edges=False,
-                                colormap=colormap,
-                                simplices=faces,
-                                backgroundcolor='rgb(64, 64, 64)',
-                                title="Interactive Visualization")
-        iplot(fig)
-
-
-    def plt_3d(verts, faces):
-        print("drwaing")
-
-        x, y, z = zip(*verts)
-        fig = plt.figure(figsize=(10, 10))
-        ax = fig.add_subplot(111, projection='3d')
-
-        # Fancy indexing: `verts[faces]` to generate a collection of triangles
-        mesh = Poly3DCollection(verts[faces], linewidths=0.05, alpha=1)
-        face_color = [1, 1, 0.9]
-        mesh.set_facecolor(face_color)
-        ax.add_collection3d(mesh)
-
-        ax.set_xlim(0, max(x))
-        ax.set_ylim(0, max(y))
-        ax.set_zlim(0, max(z))
-        ax.set_facecolor((0.7, 0.7, 0.7))
-        plt.show()
-
-
-    with h5py.File('/work/users/afmi_msc_thesis_delete_01oct2020/head_neck_new4.h5','r+') as hdf:
-        print(hdf.keys())
-
-        images = hdf['fold_10']['input'][2]
-        print(images)
-
-        new_image = images[:,:,:,0]
-
-
-        print(new_image.shape)
-        v, f = make_mesh(new_image, 350)
-        plt_3d(v, f)
-    #     masks = hdf['fold_19']['target'][2]
-    #
-    #     f, axes = plt.subplots(5, 5, figsize=(18, 18))
-    #     ax_i = 0
-    #     for i in range(25):
-    #         ax = axes[ax_i // 5][ax_i % 5]
-    #         ax.imshow(images[i,:,:,0], 'gray')
-    #         ax.contour(masks[:,:], 1, colors='yellow')
-    #         ax.set_title(f"Slice {i}")
-    #         ax_i += 1
-    #     plt.show()
-    # #     #
-        # plt.imshow(first_mask[23],aspect=0.5)
-        # # struct_arr2 = first_vol.T
-        # # plt.imshow(struct_arr2[76],aspect=0.5)
-        # plt.colorbar()
-        # plt.title('plot for images')
-        # plt.show()
-
-
-
+    
 
     #ex_comet = ex(api_key="zoPcSaPo6mhKthsM8SOcgq9Uk",project_name="masterthesisafreen", workspace="afreen3010")
     #
-    # config = read_file('json/small_vnet_modified.json')
-    # experiment = Experiment()
+    config = read_file('json/vnet_architecture_new.json')
+    experiment = Experiment()
     #
-    # experiment.from_full_config(config).run_experiment()
-    # experiment.from_full_config(config).run_test()
+    #from pdb import set_trace; set_trace()
+    experiment.from_full_config(config).run_experiment()
+    experiment.from_full_config(config).run_test()
 
     # with h5py.File('logs/test/prediction_test.h5','r+') as hf:
     #    print(hf['predicted'][4])
