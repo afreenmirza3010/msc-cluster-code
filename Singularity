@@ -12,3 +12,4 @@ Stage: build
 
 %environment
     export KERAS_MODE=TENSORFLOW
+    
