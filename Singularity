@@ -6,7 +6,8 @@ Stage: build
     apt update -y
     apt upgrade -y
     pip install ipython
-    pip install https://github.com/huynhngoc/deoxys/archive/Multiple-losses.zip
+    pip install http://github.com/huynhngoc/deoxys/archive/master.zip
+    pip install tensorflow==2.0.0
     pip install comet-ml
     pip install scikit-image
 
