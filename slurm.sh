@@ -2,8 +2,8 @@
 #SBATCH --ntasks=1               # 1 core(CPU)
 #SBATCH --nodes=1                # Use 1 node
 #SBATCH --job-name=vnet_test   # sensible name for the job
-#SBATCH --mem=64G               # Default memory per CPU is 3GB.
-#SBATCH --partition=gpu # Use the verysmallmem-partition for jobs requiring < 10 GB RAM.
+#SBATCH --mem=196G             # Default memory per CPU is 3GB.
+#SBATCH --partition=gpu   # Use the verysmallmem-partition for jobs requiring < 10 GB RAM.
 #SBATCH --gres=gpu:1
 #SBATCH --mail-user=afmi@nmbu.no # Email me when job is done.
 #SBATCH --mail-type=ALL

@@ -30,27 +30,12 @@ if __name__ == '__main__':
 
     #ex_comet = ex(api_key="zoPcSaPo6mhKthsM8SOcgq9Uk",project_name="masterthesisafreen", workspace="afreen3010")
     #
-    config = read_file('json/vnet_architecture.json')
+    config = read_file('json/layer_32_filter_new.json')
     experiment = Experiment()
     #
     #from pdb import set_trace; set_trace()
     experiment.from_full_config(config).run_experiment(train_history_log=True,
         model_checkpoint_period=10,epochs=100).plot_performance()
-    experiment.from_full_config(config).run_test()
+    
 
-    # with h5py.File('logs/test/prediction_test.h5','r+') as hf:
-    #    print(hf['predicted'][4])
-
-
-    # # # defining model here
-    # model = model_from_full_config(config)
-    # x, y = model.data_reader.train_generator.generate().__next__()
-    #breakpoint()
-    #with ex_comet.train():
-        #x, y = model.data_reader.train_generator.generate().__next__()
-        #model.fit(x, y)
-
-
-
-
-    # model.fit(x, y)
+    
