@@ -8,13 +8,13 @@
                 "y_name": "target",
                 "batch_cache": 1,
                 "train_folds": [
-                    4,5,6,8,21,27,28
+                    4,5,6,8,27,28
                 ],
                 "val_folds": [
                     29,30,31
                 ],
                 "test_folds": [
-                    32,33,34
+                    32,33,34,35,36
                 ]
             }
         },
@@ -84,6 +84,12 @@
                     "class_name": "MaxPooling3D"
                 },
                 {
+                    "class_name": "Dropout",
+                    "config": {
+                        "rate": 0.5
+                    }
+                },
+                {
                     "class_name": "Conv3D",
                     "config": {
                         "filters": 64,
@@ -112,6 +118,12 @@
                 },
                 {
                     "class_name": "MaxPooling3D"
+                },
+                {
+                    "class_name": "Dropout",
+                    "config": {
+                        "rate": 0.5
+                    }
                 },
                 {
                     "class_name": "Conv3D",
@@ -144,6 +156,12 @@
                     "class_name": "MaxPooling3D"
                 },
                 {
+                    "class_name": "Dropout",
+                    "config": {
+                        "rate": 0.5
+                    }
+                },
+                {
                     "class_name": "Conv3D",
                     "config": {
                         "filters": 256,
@@ -172,6 +190,12 @@
                 },
                 {
                     "class_name": "MaxPooling3D"
+                },
+                {
+                    "class_name": "Dropout",
+                    "config": {
+                        "rate": 0.5
+                    }
                 },
                 {
                     "class_name": "Conv3D",
@@ -240,6 +264,12 @@
                         "class_name": "BatchNormalization"
                     }
                 },
+				{
+                    "class_name": "Dropout",
+                    "config": {
+                        "rate": 0.5
+                    }
+                },
                 {
                     "name": "conv_T_2",
                     "class_name": "Conv3DTranspose",
@@ -279,6 +309,12 @@
                     },
                     "normalizer": {
                         "class_name": "BatchNormalization"
+                    }
+                },
+				{
+                    "class_name": "Dropout",
+                    "config": {
+                        "rate": 0.5
                     }
                 },
                 {
@@ -322,6 +358,12 @@
                         "class_name": "BatchNormalization"
                     }
                 },
+				{
+                    "class_name": "Dropout",
+                    "config": {
+                        "rate": 0.5
+                    }
+                },
                 {
                     "name": "conv_T_4",
                     "class_name": "Conv3DTranspose",
@@ -361,6 +403,12 @@
                     },
                     "normalizer": {
                         "class_name": "BatchNormalization"
+                    }
+                },
+				{
+                    "class_name": "Dropout",
+                    "config": {
+                        "rate": 0.5
                     }
                 },
                 {
